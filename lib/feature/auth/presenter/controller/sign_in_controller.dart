@@ -25,7 +25,6 @@ class SignInController extends AutoDisposeAsyncNotifier<SignInStatus> {
 
     final authRepo = ref.read(signInServiceProvider);
     final result = await authRepo.signInAnonymous();
-    print(' este es el resultado${result}');
     result.fold((value) => state = const AsyncData(SignInStatus.success),
         (err) => state = AsyncError(err, StackTrace.current));
   }

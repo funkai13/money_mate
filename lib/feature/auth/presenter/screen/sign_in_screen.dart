@@ -16,21 +16,60 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     ref.read(signInControllerProvider.notifier).signInAnonymous();
   }
 
+  Future<void> _signIn() async {
+    if (!formKey.currentState!.validate()) return;
+    ref.read(signInControllerProvider.notifier).signIn(
+        email: _emailController.text, password: _passwordController.text);
+  }
+
   late final formKey = GlobalKey<FormState>();
-  var email = '';
-  var password = '';
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Center(
-                child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ElevatedButton(
-            onPressed: _anonymousSign, child: const Text('Sign Anonymously'))
-      ],
-    ))));
+            child: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Center(
+          child: Form(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'Inicar Sesion',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24),
+            ),
+            const SizedBox(height: 28),
+            TextFormField(
+              controller: _emailController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                hintText: 'Ingresa tu Correo',
+                prefixIcon: Icon(Icons.email_outlined),
+              ),
+            ),
+            const SizedBox(height: 28),
+            TextFormField(
+              controller: _passwordController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: TextInputType.visiblePassword,
+              decoration: const InputDecoration(
+                hintText: 'Ingresa tu Contraseña',
+                prefixIcon: Icon(Icons.email_outlined),
+              ),
+            ),
+            ElevatedButton(
+                onPressed: _signIn, child: const Text('Iniciar Sesion'))
+          ],
+        ),
+      )),
+    )));
   }
 }
