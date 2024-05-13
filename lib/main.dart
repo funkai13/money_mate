@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_mate/feature/auth/presenter/screen/sign_in_screen.dart';
+import 'package:money_mate/feature/auth/presenter/screen/sign_up_screen.dart';
 import 'package:money_mate/firebase_options.dart';
 
 void main() async {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         child: const MaterialApp(
           //theme: AppTheme.theme,
           title: 'cupertino APp',
-          home: SignInScreen(),
+          home: SignUpScreen(),
         ));
   }
 }
