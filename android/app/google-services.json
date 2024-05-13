@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "685145185713",
+    "project_id": "moneymate-835cc",
+    "storage_bucket": "moneymate-835cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685145185713:android:c9bb59ef435e8a93ec3190",
+        "android_client_info": {
+          "package_name": "com.evinssonmedrano.money_mate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMub80nk7eScOKg-V3OlQR3j5CD751D1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
