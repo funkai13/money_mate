@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:money_mate/feature/auth/presenter/controller/sign_out_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
-  static const String route = '/home';
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,9 +20,12 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: Drawer(
         child: ListView(
-          children: const [
+          children: [
             ListTile(
-              title: Text('User'),
+              title: const Text('Log out'),
+              onTap: () {
+                ref.read(logoutControllerProvider.notifier).signOut(context);
+              },
             )
           ],
         ),

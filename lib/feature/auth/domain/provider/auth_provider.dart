@@ -19,3 +19,8 @@ final signOutServiceProvider = Provider<SignOutRepository>(
     FirebaseAuth.instance,
   ),
 );
+
+final authStateChangesProvider = StreamProvider<User?>((ref) {
+  final auth = FirebaseAuth.instance;
+  return auth.authStateChanges();
+});
