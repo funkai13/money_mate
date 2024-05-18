@@ -29,16 +29,22 @@ class ChartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: SfCartesianChart(
-        primaryXAxis: const DateTimeAxis(),
-        title: const ChartTitle(text: 'Balance'),
-        legend: const Legend(isVisible: true),
-        tooltipBehavior: TooltipBehavior(enable: true),
-        series: _getLineSeries(
-          Data.resultsWithData,
+    return Container(
+      width: 400,
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: SfCartesianChart(
+            primaryXAxis: const DateTimeAxis(),
+            title: const ChartTitle(text: 'Balance'),
+            legend: const Legend(isVisible: true),
+            tooltipBehavior: TooltipBehavior(enable: true),
+            series: _getLineSeries(
+              Data.resultsWithData,
+            ),
+          ),
         ),
       ),
     );
