@@ -1,12 +1,17 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:money_mate/feature/auth/domain/provider/auth_provider.dart';
 import 'package:money_mate/feature/auth/presenter/screen/auth_screen.dart';
 import 'package:money_mate/feature/auth/presenter/screen/sign_in_screen.dart';
 import 'package:money_mate/feature/auth/presenter/screen/sign_up_screen.dart';
 import 'package:money_mate/feature/home/presenter/screen/home_screen.dart';
+import 'package:money_mate/feature/planning/presenter/screen/planning_screen.dart';
 import 'package:money_mate/feature/splash_screen/presenter/splash_screen.dart';
+import 'package:money_mate/feature/statistics/presenter/screen/statistics_screen.dart';
+import 'package:money_mate/feature/users/presenter/screen/user_profile_register_screen.dart';
 import 'package:money_mate/routes.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:money_mate/feature/auth/domain/provider/auth_provider.dart';
+
+import '../../feature/Transactions/presenter/screen/widgets/prueba_income_screen.dart';
 
 final routerProvider = Provider((ref) {
   return _routeConfig(redirect: (context, state) {
@@ -52,5 +57,20 @@ GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
           path: Routes.signUp,
           builder: (context, state) => SignUpScreen(),
         ),
+        GoRoute(
+          path: Routes.statistics,
+          builder: (context, state) => StatisticsScreen(),
+        ),
+        GoRoute(
+          path: Routes.planning,
+          builder: (context, state) => PlanningScreen(),
+        ),
+        GoRoute(
+          path: Routes.incomes,
+          builder: (context, state) => const IncomeScreen(),
+        ),
+        GoRoute(
+            path: Routes.profileRegister,
+            builder: (context, state) => const ProfileRegisterScreen())
       ],
     );

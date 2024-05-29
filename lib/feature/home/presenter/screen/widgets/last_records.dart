@@ -8,6 +8,7 @@ class LastRecords extends StatelessWidget {
     return Container(
       width: 400,
       child: Card(
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(

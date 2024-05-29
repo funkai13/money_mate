@@ -7,8 +7,6 @@ import 'package:money_mate/routes.dart';
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
-  static const String route = '/sign_up';
-
   @override
   ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }

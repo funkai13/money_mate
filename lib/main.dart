@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:money_mate/core/provider/navigation_provider.dart';
 import 'package:money_mate/firebase_options.dart';
-import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 

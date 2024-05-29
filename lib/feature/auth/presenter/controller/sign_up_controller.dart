@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/feature/auth/domain/provider/auth_provider.dart';
@@ -20,7 +21,7 @@ class SignUpController extends AutoDisposeAsyncNotifier<SignUpStatus> {
     final authRepo = ref.read(signUpServiceProvider);
 
     final result = await authRepo.signUp(email: email, password: password);
-    context.go(Routes.home);
+    context.go(Routes.profileRegister);
     result.fold(
       (value) => state = const AsyncData(SignUpStatus.success),
       (err) => state = AsyncError(err, StackTrace.current),

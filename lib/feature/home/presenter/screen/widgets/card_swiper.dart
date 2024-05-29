@@ -21,7 +21,7 @@ class CardSwiper extends StatelessWidget {
           margin: EdgeInsets.all(1),
           builder: DotSwiperPaginationBuilder(
               color: Colors.black12,
-              activeColor: Colors.green,
+              activeColor: Colors.white,
               activeSize: 8,
               size: 5,
               space: 3),

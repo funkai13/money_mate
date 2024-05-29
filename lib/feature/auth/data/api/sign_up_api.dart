@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:money_mate/core/mobile_shared_utils/utils/failures/auth_failure.dart';
 import 'package:money_mate/core/mobile_shared_utils/utils/result/result.dart';
-import 'package:money_mate/feature/auth/domain/entity/app_user.dart';
+import 'package:money_mate/feature/auth/domain/entity/auth_user.dart';
 import 'package:money_mate/feature/auth/domain/repositories/sign_up_repository.dart';
 
 class SignUpService implements SignUpRepository {
@@ -9,7 +9,7 @@ class SignUpService implements SignUpRepository {
   final FirebaseAuth client;
 
   @override
-  Future<Result<AppUser, SignUpAuthFailure>> signUp(
+  Future<Result<AuthUser, SignUpAuthFailure>> signUp(
       {required String email, required String password}) async {
     try {
       final credentials = await client.createUserWithEmailAndPassword(
@@ -17,10 +17,9 @@ class SignUpService implements SignUpRepository {
 
       final user = credentials.user;
       if (user != null) {
-        return Success(AppUser(
+        return Success(AuthUser(
           id: user.uid,
           email: user.email ?? '',
-          username: user.displayName ?? '',
         ));
       }
       return Err(SignUpAuthFailure.userNotCreate);
