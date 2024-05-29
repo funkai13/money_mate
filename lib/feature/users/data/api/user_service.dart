@@ -37,7 +37,7 @@ class UserService implements UserRepository {
       DocumentReference accountsRef = financesRef.collection('accounts').doc();
       await accountsRef.set({
         'creation_date': FieldValue.serverTimestamp(),
-        'name': 'my account',
+        'title': 'my account',
         'balance': 0.0,
       });
       await accountsRef
