@@ -7,5 +7,5 @@ class AccountBalance {
   final String title;
   final double balance;
   final DateTime creationDate;
-  final DateTime updateDate;
+  final DateTime? updateDate;
 }
