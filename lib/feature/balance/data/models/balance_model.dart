@@ -18,8 +18,9 @@ class AccountBalanceModel extends AccountBalance {
     return AccountBalanceModel(
       title: data?['title'],
       balance: data?['balance'],
-      creationDate: data?['creation_date'],
-      updateDate: data?['update_date'],
+      creationDate: (data?['creation_date'] as Timestamp?)!
+          .toDate(), // Convierte Timestamp a DateTime
+      updateDate: (data?['update_date'] as Timestamp?)!.toDate(), // Convie
     );
   }
 
