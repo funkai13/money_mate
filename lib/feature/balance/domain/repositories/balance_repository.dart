@@ -7,4 +7,5 @@ abstract interface class BalanceRepository {
     required DateTime creationDate,
     required DateTime updateDate,
   });
+  Future<List<AccountBalance>> getALl();
 }
