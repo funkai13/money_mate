@@ -8,14 +8,16 @@ import '../models/balance_model.dart';
 class BalanceService implements BalanceRepository {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _firebaseAuth;
+
   BalanceService(this._firestore, this._firebaseAuth);
 
   @override
-  Future<AccountBalance> createAccountBalance(
-      {required String title,
-      required double balance,
-      required DateTime creationDate,
-      required DateTime updateDate}) async {
+  Future<AccountBalance> createAccountBalance({
+    required String title,
+    required double balance,
+    required DateTime creationDate,
+    required DateTime updateDate,
+  }) async {
     String uid = _firebaseAuth.currentUser!.uid;
     String financeId = '1';
     DocumentReference financesRef = _firestore
@@ -52,5 +54,22 @@ class BalanceService implements BalanceRepository {
         .map((e) => AccountBalanceModel.fromFirestore(e, null))
         .toList();
     return balanceAccounts;
+  }
+
+  @override
+  Future<AccountBalanceModel> getOne({required String id}) async {
+    String uid = _firebaseAuth.currentUser!.uid;
+    String financeId = '1';
+
+    return _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('finances')
+        .doc(financeId)
+        .collection('accounts')
+        .doc(id)
+        .get()
+        .then((docSnapshot) =>
+            AccountBalanceModel.fromFirestore(docSnapshot, null));
   }
 }
