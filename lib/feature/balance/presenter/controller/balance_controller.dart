@@ -5,8 +5,6 @@ import 'package:money_mate/feature/balance/domain/provider/balance_provider.dart
 
 import '../../domain/entity/balance.dart';
 
-enum BalanceStatus { none, success }
-
 class BalanceController extends AutoDisposeAsyncNotifier<List<AccountBalance>> {
   @override
   FutureOr<List<AccountBalance>> build() async {
@@ -23,6 +21,30 @@ class BalanceController extends AutoDisposeAsyncNotifier<List<AccountBalance>> {
     }
     state = AsyncValue.data(accountsBalances);
     return accountsBalances;
+  }
+
+  Future<AccountBalance> createAccountBalance({
+    required String title,
+    required double balance,
+    required DateTime creationDate,
+    required DateTime updateDate,
+  }) async {
+    final balanceRepo = ref.read(balanceServiceProvider);
+    final accountBalance = await balanceRepo.createAccountBalance(
+      title: title,
+      balance: balance,
+      creationDate: creationDate,
+      updateDate: updateDate,
+    );
+    return accountBalance;
+  }
+
+  Future<AccountBalance> getOne({
+    required String id,
+  }) async {
+    final balanceRepo = ref.read(balanceServiceProvider);
+    final accountBalance = await balanceRepo.getOne(id: id);
+    return accountBalance;
   }
 }
 
