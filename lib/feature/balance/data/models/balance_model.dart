@@ -7,7 +7,7 @@ class AccountBalanceModel extends AccountBalance {
     required super.title,
     required super.balance,
     required super.creationDate,
-    required super.updateDate,
+    super.updateDate,
   });
 
   factory AccountBalanceModel.fromFirestore(
