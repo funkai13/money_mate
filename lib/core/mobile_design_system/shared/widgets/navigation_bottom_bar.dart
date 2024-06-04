@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:money_mate/feature/Transactions/presenter/screen/widgets/add_transaction_dialog.dart';
 
 import '../../../../routes.dart';
-import 'draggable_sheet.dart';
 
 class NavigationBottomBar extends StatelessWidget {
   const NavigationBottomBar({super.key});
@@ -23,14 +22,16 @@ class NavigationBottomBar extends StatelessWidget {
             context.go(Routes.planning);
           case 2:
             showModalBottomSheet(
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (_) => DraggableSheet(
-                      child: AddTransactionDialog(),
-                    )
-                // builder: (_) => const AddTransactionDialog(),
-                );
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => DraggableScrollableSheet(
+                expand: false,
+                builder: (context, scrollController) => SingleChildScrollView(
+                  controller: scrollController,
+                  child: AddTransactionDialog(),
+                ),
+              ),
+            );
           case 3:
             context.go(Routes.incomes);
         }
