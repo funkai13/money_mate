@@ -8,4 +8,8 @@ abstract interface class BalanceRepository {
     required DateTime updateDate,
   });
   Future<List<AccountBalance>> getALl();
+
+  Future<AccountBalance> getOne({
+    required String id,
+  });
 }
