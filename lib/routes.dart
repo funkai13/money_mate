@@ -9,4 +9,5 @@ class Routes {
   static const String planning = '/planning';
   static const String incomes = '/incomes';
   static const String profileRegister = '/profile/register';
+  static const String balanceDetail = '/balance';
 }
