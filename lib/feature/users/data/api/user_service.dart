@@ -28,8 +28,11 @@ class UserService implements UserRepository {
           .collection('users')
           .doc(uid)
           .set(userModel.toFirestore());
-      DocumentReference financesRef =
-          _firestore.collection('users').doc(uid).collection('finances').doc();
+      DocumentReference financesRef = _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('finances')
+          .doc('1');
       await financesRef.set({
         'creation_date': FieldValue.serverTimestamp(),
       });
@@ -39,6 +42,7 @@ class UserService implements UserRepository {
         'creation_date': FieldValue.serverTimestamp(),
         'title': 'my account',
         'balance': 0.0,
+        'update_date': FieldValue.serverTimestamp(),
       });
       await accountsRef
           .collection('incomes')
