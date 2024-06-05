@@ -14,7 +14,7 @@ class BalanceCard extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: GestureDetector(
         onTap: () {
-          context.go(Routes.balanceDetail,
+          context.push(Routes.balanceDetail,
               extra: {'title': title, 'balance': balance});
         },
         child: Card(
