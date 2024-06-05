@@ -6,3 +6,8 @@ import 'package:money_mate/feature/balance/domain/repositories/balance_repositor
 
 final balanceServiceProvider = Provider<BalanceRepository>(
     (_) => BalanceService(FirebaseFirestore.instance, FirebaseAuth.instance));
+
+final selectedBalanceAccountTitleProvider =
+    StateProvider<String?>((ref) => null);
+final selectedBalanceDoubleValueProvider =
+    StateProvider<double?>((ref) => null);
