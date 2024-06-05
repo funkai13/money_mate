@@ -13,6 +13,8 @@ import 'package:money_mate/feature/users/presenter/screen/user_profile_register_
 import 'package:money_mate/routes.dart';
 
 import '../../feature/Transactions/presenter/screen/widgets/prueba_income_screen.dart';
+import '../../feature/Transactions/presenter/screen/widgets/select_account.dart';
+import '../../feature/Transactions/presenter/screen/widgets/select_category.dart';
 
 final routerProvider = Provider((ref) {
   return _routeConfig(redirect: (context, state) {
@@ -79,6 +81,15 @@ GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
             title: (state.extra as Map<String, dynamic>)['title'] as String,
             balance: (state.extra as Map<String, dynamic>)['balance'] as double,
           ),
+        ),
+
+        GoRoute(
+          path: Routes.selectAccount,
+          builder: (context, state) => const SelectAccount(),
+        ),
+        GoRoute(
+          path: Routes.selectCategory,
+          builder: (context, state) => const SelectCategory(),
         ),
       ],
     );
