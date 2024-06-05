@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:money_mate/core/mobile_design_system/shared/widgets/dialog_form_field.dart';
 
 import '../../controller/balance_controller.dart';
 
@@ -23,6 +25,13 @@ class _CreateAccountBalanceDialog
           creationDate: DateTime.now(),
           updateDate: DateTime.now(),
         );
+    if (mounted) {
+      Navigator.of(context).pop();
+      ref.refresh(balanceControllerProvider);
+      Future.delayed(const Duration(milliseconds: 100)).then((_) {
+        context.go('/home');
+      });
+    }
   }
 
   late final formKey = GlobalKey<FormState>();
@@ -100,76 +109,24 @@ class _CreateAccountBalanceDialog
                 key: formKey,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.text_snippet,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              keyboardType: TextInputType.text,
-                              controller: _accountNameController,
-                              decoration: const InputDecoration(
-                                hintText: 'Mi Cuenta',
-                                labelText: 'Nombre De la Cuenta',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.calculate,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              keyboardType: TextInputType.number,
-                              controller: _balanceController,
-                              decoration: const InputDecoration(
-                                hintText: '0.00',
-                                labelText: 'Balance Actual',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    DialogFormField(
+                        hintText: 'mi cuenta',
+                        labelText: 'Nombre de la Cuenta ',
+                        icon: Icons.text_snippet,
+                        containerColor: Colors.blueAccent,
+                        iconColor: Colors.white,
+                        controller: _accountNameController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.text),
+                    DialogFormField(
+                        hintText: '0.00',
+                        labelText: 'Balance Actual',
+                        icon: Icons.calculate,
+                        containerColor: Colors.orangeAccent,
+                        iconColor: Colors.white,
+                        controller: _balanceController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.number),
                   ],
                 ),
               ),
