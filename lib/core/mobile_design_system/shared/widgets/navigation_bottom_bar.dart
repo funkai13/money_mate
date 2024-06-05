@@ -17,9 +17,9 @@ class NavigationBottomBar extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            context.go(Routes.home);
+            context.push(Routes.home);
           case 1:
-            context.go(Routes.planning);
+            context.push(Routes.planning);
           case 2:
             showModalBottomSheet(
               context: context,
@@ -33,7 +33,7 @@ class NavigationBottomBar extends StatelessWidget {
               ),
             );
           case 3:
-            context.go(Routes.incomes);
+            context.push(Routes.incomes);
         }
       },
       items: [
