@@ -36,6 +36,7 @@ class BalanceController extends AutoDisposeAsyncNotifier<List<AccountBalance>> {
       creationDate: creationDate,
       updateDate: updateDate,
     );
+    state = state.whenData((balances) => [...balances, accountBalance]);
     return accountBalance;
   }
 
