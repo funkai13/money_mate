@@ -3,6 +3,7 @@ import 'package:money_mate/feature/Transactions/presenter/screen/widgets/transac
 import 'package:money_mate/feature/balance/presenter/screens/widgets/create_account_balance_dialog.dart';
 import 'package:money_mate/feature/home/presenter/screen/widgets/chart_card.dart';
 
+import '../../../../core/mobile_design_system/shared/widgets/keyboard_responsive_bottomsheet.dart';
 import '../../../Transactions/presenter/screen/widgets/add_transaction_dialog.dart';
 
 class AccountBalanceScreen extends StatelessWidget {
@@ -31,13 +32,17 @@ class AccountBalanceScreen extends StatelessWidget {
           TextButton(
             onPressed: () {
               showModalBottomSheet(
+                enableDrag: false,
+                backgroundColor: Colors.white,
+                elevation: 0.0,
                 context: context,
                 isScrollControlled: true,
-                builder: (context) => DraggableScrollableSheet(
-                  expand: false,
-                  builder: (context, scrollController) => SingleChildScrollView(
-                    controller: scrollController,
-                    child: const CreateAccountBalanceDialog(),
+                builder: (context) => KeyboardResponsiveBottomSheet(
+                  initialChildSize: 0.60,
+                  child: CreateAccountBalanceDialog(
+                    isEditing: true,
+                    title: title,
+                    balance: balance,
                   ),
                 ),
               );
