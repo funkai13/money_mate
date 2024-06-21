@@ -19,7 +19,7 @@ class BalanceService implements BalanceRepository {
     required DateTime updateDate,
   }) async {
     String uid = _firebaseAuth.currentUser!.uid;
-    String financeId = '1';
+    String financeId = uid;
     DocumentReference financesRef = _firestore
         .collection('users')
         .doc(uid)
@@ -33,13 +33,13 @@ class BalanceService implements BalanceRepository {
       updateDate: updateDate,
     );
     await accountsRef.set(accountBalance.toFirestore());
-    throw UnimplementedError();
+    return accountBalance;
   }
 
   @override
-  Future<List<AccountBalance>> getALl() async {
+  Future<List<AccountBalance>> getAll() async {
     String uid = _firebaseAuth.currentUser!.uid;
-    String financeId = '1';
+    String financeId = uid;
     final accountsRef = _firestore
         .collection('users')
         .doc(uid)
@@ -59,7 +59,7 @@ class BalanceService implements BalanceRepository {
   @override
   Future<AccountBalanceModel> getOne({required String id}) async {
     String uid = _firebaseAuth.currentUser!.uid;
-    String financeId = '1';
+    String financeId = uid;
 
     return _firestore
         .collection('users')
@@ -71,5 +71,59 @@ class BalanceService implements BalanceRepository {
         .get()
         .then((docSnapshot) =>
             AccountBalanceModel.fromFirestore(docSnapshot, null));
+  }
+
+  @override
+  Future<AccountBalance> update(
+      {required String currentTitle,
+      required double balance,
+      required String newTitle}) async {
+    String uid = _firebaseAuth.currentUser!.uid;
+    String financeId = uid;
+    final accountsRef = _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('finances')
+        .doc(financeId)
+        .collection('accounts');
+    final querySnapshot =
+        await accountsRef.where('title', isEqualTo: currentTitle).get();
+    final accountDoc = querySnapshot.docs.first;
+
+    await accountDoc.reference.update({
+      'title': newTitle,
+      'balance': balance,
+      'update_date': FieldValue.serverTimestamp(),
+    });
+
+    return AccountBalanceModel.fromFirestore(accountDoc, null);
+  }
+
+  @override
+  Future<void> delete({required String currentTitle}) async {
+    try {
+      String uid = _firebaseAuth.currentUser!.uid;
+      String financeId = uid;
+
+      final accountsRef = _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('finances')
+          .doc(financeId)
+          .collection('accounts');
+
+      final querySnapshot =
+          await accountsRef.where('title', isEqualTo: currentTitle).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final accountDoc = querySnapshot.docs.first;
+        await accountDoc.reference.delete();
+      } else {
+        throw Exception("No account found with title $currentTitle");
+      }
+    } catch (e) {
+      print('Error deleting account: $e');
+      throw e;
+    }
   }
 }
