@@ -32,7 +32,7 @@ class UserService implements UserRepository {
           .collection('users')
           .doc(uid)
           .collection('finances')
-          .doc('1');
+          .doc(uid);
       await financesRef.set({
         'creation_date': FieldValue.serverTimestamp(),
       });
