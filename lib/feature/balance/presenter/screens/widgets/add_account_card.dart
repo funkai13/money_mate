@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_mate/feature/balance/presenter/screens/widgets/create_account_balance_dialog.dart';
 
+import '../../../../../core/mobile_design_system/shared/widgets/keyboard_responsive_bottomsheet.dart'; // Asegúrate de importar correctamente
+
 class AddAccountCard extends StatelessWidget {
   const AddAccountCard({super.key});
 
@@ -9,10 +11,18 @@ class AddAccountCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
-          backgroundColor: Colors.grey[300],
+          enableDrag: false,
+          backgroundColor: Colors.white,
+          elevation: 0.0,
           context: context,
           isScrollControlled: true,
-          builder: (context) => KeyboardResponsiveBottomSheet(),
+          builder: (context) => const KeyboardResponsiveBottomSheet(
+            child: CreateAccountBalanceDialog(
+              isEditing: false,
+              title: '',
+              balance: null,
+            ),
+          ),
         );
       },
       child: Padding(
@@ -41,51 +51,6 @@ class AddAccountCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class KeyboardResponsiveBottomSheet extends StatefulWidget {
-  @override
-  _KeyboardResponsiveBottomSheetState createState() =>
-      _KeyboardResponsiveBottomSheetState();
-}
-
-class _KeyboardResponsiveBottomSheetState
-    extends State<KeyboardResponsiveBottomSheet> with WidgetsBindingObserver {
-  double _initialChildSize = 0.5;
-  double _maxChildSize = 0.95;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeMetrics() {
-    final bottomInset = WidgetsBinding.instance.window.viewInsets.bottom;
-    setState(() {
-      _initialChildSize = bottomInset > 0 ? 0.95 : 0.5;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: _initialChildSize,
-      maxChildSize: _maxChildSize,
-      expand: false,
-      builder: (context, scrollController) => SingleChildScrollView(
-        controller: scrollController,
-        child: CreateAccountBalanceDialog(),
       ),
     );
   }
