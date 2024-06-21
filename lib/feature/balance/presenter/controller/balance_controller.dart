@@ -13,7 +13,7 @@ class BalanceController extends AutoDisposeAsyncNotifier<List<AccountBalance>> {
 
   Future<List<AccountBalance>> getAll() async {
     final balanceRepo = ref.read(balanceServiceProvider);
-    final accountsBalances = await balanceRepo.getALl();
+    final accountsBalances = await balanceRepo.getAll();
     print('pintando balances');
     for (var accountBalance in accountsBalances) {
       print(
@@ -46,6 +46,37 @@ class BalanceController extends AutoDisposeAsyncNotifier<List<AccountBalance>> {
     final balanceRepo = ref.read(balanceServiceProvider);
     final accountBalance = await balanceRepo.getOne(id: id);
     return accountBalance;
+  }
+
+  Future<AccountBalance> updateOne({
+    required String currentTitle,
+    required String newTitle,
+    required double balance,
+  }) async {
+    final balanceRepo = ref.read(balanceServiceProvider);
+    final accountBalance = await balanceRepo.update(
+        currentTitle: currentTitle, newTitle: newTitle, balance: balance);
+    state = state.whenData((balances) => [...balances, accountBalance]);
+    return accountBalance;
+  }
+
+  Future<void> delete({
+    required String currentTitle,
+  }) async {
+    try {
+      final balanceRepo = ref.read(balanceServiceProvider);
+      await balanceRepo.delete(
+        currentTitle: currentTitle,
+      );
+
+      state = state.whenData((balances) =>
+          balances.where((balance) => balance.title != currentTitle).toList());
+
+      ref.refresh(balanceServiceProvider);
+    } catch (e, stackTrace) {
+      state = AsyncValue.error(e, stackTrace);
+      print('Error deleting account: $e');
+    }
   }
 }
 
