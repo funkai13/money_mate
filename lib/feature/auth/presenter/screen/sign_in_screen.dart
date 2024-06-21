@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_mate/feature/auth/presenter/controller/sign_in_controller.dart';
@@ -8,8 +6,6 @@ import 'package:money_mate/routes.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
-
-  static const String route = '/';
 
   @override
   ConsumerState<SignInScreen> createState() => _SignInScreenState();

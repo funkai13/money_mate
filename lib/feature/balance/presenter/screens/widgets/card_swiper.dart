@@ -1,9 +1,13 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:money_mate/feature/home/presenter/screen/widgets/balance_card.dart';
+import 'package:money_mate/feature/balance/presenter/screens/widgets/balance_card.dart';
+
+import '../../../domain/entity/balance.dart';
+import 'add_account_card.dart';
 
 class CardSwiper extends StatelessWidget {
-  const CardSwiper({super.key});
+  final List<AccountBalance> accountBalances;
+  const CardSwiper({super.key, required this.accountBalances});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class CardSwiper extends StatelessWidget {
         scale: 1,
         itemWidth: 100,
         itemHeight: 150,
-        itemCount: 3,
+        itemCount: accountBalances.length + 1,
         pagination: const SwiperPagination(
           margin: EdgeInsets.all(1),
           builder: DotSwiperPaginationBuilder(
@@ -27,7 +31,15 @@ class CardSwiper extends StatelessWidget {
               space: 3),
         ),
         itemBuilder: (context, int index) {
-          return const BalanceCard();
+          if (index < accountBalances.length) {
+            final accountBalance = accountBalances[index];
+            return BalanceCard(
+              title: accountBalance.title,
+              balance: accountBalance.balance,
+            );
+          } else {
+            return const AddAccountCard();
+          }
         },
       ),
     );

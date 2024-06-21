@@ -7,14 +7,15 @@ class TransactionInfoRow extends StatelessWidget {
   final Color containerColor;
   final IconData buttonIcon;
   final Color iconColor;
-  const TransactionInfoRow(
-      {super.key,
-      required this.title,
-      required this.buttonText,
-      required this.icon,
-      required this.containerColor,
-      required this.buttonIcon,
-      required this.iconColor});
+  const TransactionInfoRow({
+    super.key,
+    required this.title,
+    required this.buttonText,
+    required this.icon,
+    required this.containerColor,
+    required this.buttonIcon,
+    required this.iconColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class TransactionInfoRow extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 16),
               ),
             ],
