@@ -5,3 +5,9 @@ import 'package:money_mate/feature/Transactions/domain/repositories/income_repos
 
 final incomeServiceProvider = Provider<IncomeRepository>(
     (_) => IncomeService(FirebaseFirestore.instance));
+
+final selectedAccountProvider = StateProvider<String?>((ref) => null);
+final selectedCategoryProvider = StateProvider<String?>((ref) => null);
+final selectedLabelProvider = StateProvider<String?>((ref) => null);
+final selectedNoteProvider = StateProvider<String?>((ref) => null);
+final selectedStatusProvider = StateProvider<String?>((ref) => null);

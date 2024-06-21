@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:money_mate/core/mobile_design_system/shared/widgets/navigation_bottom_bar.dart';
 import 'package:money_mate/feature/auth/presenter/controller/sign_out_controller.dart';
-import 'package:money_mate/feature/home/presenter/screen/widgets/card_swiper.dart';
+import 'package:money_mate/feature/balance/domain/entity/balance.dart';
+import 'package:money_mate/feature/balance/presenter/controller/balance_controller.dart';
+import 'package:money_mate/feature/balance/presenter/screens/widgets/card_swiper.dart';
 import 'package:money_mate/feature/home/presenter/screen/widgets/chart_card.dart';
 import 'package:money_mate/feature/home/presenter/screen/widgets/last_records.dart';
 
@@ -58,9 +60,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ],
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 20, bottom: 15),
-                      child: CardSwiper(),
+                      child: ref.watch(balanceControllerProvider).when(
+                          data: (data) {
+                            final List<AccountBalance> accountBalance = data;
+                            return CardSwiper(accountBalances: accountBalance);
+                          },
+                          error: (e, s) => Text('error $e'),
+                          loading: () => const CircularProgressIndicator()),
                     ),
                   ],
                 ),

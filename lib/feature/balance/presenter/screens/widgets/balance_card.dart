@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../routes.dart';
 
 class BalanceCard extends StatelessWidget {
-  const BalanceCard({super.key});
+  final String? title;
+  final double? balance;
+  const BalanceCard({super.key, required this.title, required this.balance});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width * 0.7,
-      height: 100,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: GestureDetector(
+        onTap: () {
+          context.push(Routes.balanceDetail,
+              extra: {'title': title, 'balance': balance});
+        },
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(15),
@@ -33,18 +39,18 @@ class BalanceCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  'MI CUENTA',
-                  style: TextStyle(
+                Text(
+                  title.toString(),
+                  style: const TextStyle(
                     fontSize: 15,
                   ),
                 ),
-                const Text(
-                  '1000',
-                  style: TextStyle(
+                Text(
+                  balance.toString(),
+                  style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),

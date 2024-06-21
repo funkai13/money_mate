@@ -4,6 +4,7 @@ import 'package:money_mate/feature/auth/domain/provider/auth_provider.dart';
 import 'package:money_mate/feature/auth/presenter/screen/auth_screen.dart';
 import 'package:money_mate/feature/auth/presenter/screen/sign_in_screen.dart';
 import 'package:money_mate/feature/auth/presenter/screen/sign_up_screen.dart';
+import 'package:money_mate/feature/balance/presenter/screens/account_balance_screen.dart';
 import 'package:money_mate/feature/home/presenter/screen/home_screen.dart';
 import 'package:money_mate/feature/planning/presenter/screen/planning_screen.dart';
 import 'package:money_mate/feature/splash_screen/presenter/splash_screen.dart';
@@ -12,6 +13,8 @@ import 'package:money_mate/feature/users/presenter/screen/user_profile_register_
 import 'package:money_mate/routes.dart';
 
 import '../../feature/Transactions/presenter/screen/widgets/prueba_income_screen.dart';
+import '../../feature/Transactions/presenter/screen/widgets/select_account.dart';
+import '../../feature/Transactions/presenter/screen/widgets/select_category.dart';
 
 final routerProvider = Provider((ref) {
   return _routeConfig(redirect: (context, state) {
@@ -71,6 +74,22 @@ GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
         ),
         GoRoute(
             path: Routes.profileRegister,
-            builder: (context, state) => const ProfileRegisterScreen())
+            builder: (context, state) => const ProfileRegisterScreen()),
+        GoRoute(
+          path: Routes.balanceDetail,
+          builder: (context, state) => AccountBalanceScreen(
+            title: (state.extra as Map<String, dynamic>)['title'] as String,
+            balance: (state.extra as Map<String, dynamic>)['balance'] as double,
+          ),
+        ),
+
+        GoRoute(
+          path: Routes.selectAccount,
+          builder: (context, state) => const SelectAccount(),
+        ),
+        GoRoute(
+          path: Routes.selectCategory,
+          builder: (context, state) => const SelectCategory(),
+        ),
       ],
     );
