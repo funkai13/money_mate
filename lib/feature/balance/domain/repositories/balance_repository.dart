@@ -7,9 +7,18 @@ abstract interface class BalanceRepository {
     required DateTime creationDate,
     required DateTime updateDate,
   });
-  Future<List<AccountBalance>> getALl();
+  Future<List<AccountBalance>> getAll();
 
   Future<AccountBalance> getOne({
     required String id,
+  });
+
+  Future<AccountBalance> update({
+    required String currentTitle,
+    required String newTitle,
+    required double balance,
+  });
+  Future<void> delete({
+    required String currentTitle,
   });
 }
