@@ -1,31 +1,58 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:money_mate/feature/Transactions/domain/entity/income.dart';
 import 'package:money_mate/feature/Transactions/domain/repositories/income_repository.dart';
 
-import '../models/income_model.dart';
-
 class IncomeService implements IncomeRepository {
   final FirebaseFirestore _firestore;
+  final FirebaseAuth _firebaseAuth;
 
-  IncomeService(this._firestore);
+  IncomeService(this._firestore, this._firebaseAuth);
 
   @override
   Future<List<Income>> getAllIncomes({
-    required String uid,
-    required String financeId,
+    required String accountBalance,
   }) async {
-    final collectionPath = 'users/$uid/finances/$financeId/income';
-    final reference = _firestore.collection(collectionPath);
-    final querySnapshot = await reference.get();
+    String uid = _firebaseAuth.currentUser!.uid;
+    String financeId = uid;
+    final incomesRef = _firestore
+        .collection('users')
+        .doc(uid)
+        .collection('finances')
+        .doc(financeId)
+        .collection('accounts')
+        .doc(accountBalance);
+    throw UnimplementedError();
+  }
 
-    if (querySnapshot.docs.isEmpty) {
-      return [];
-    }
+  @override
+  Future<Income> createIncome(
+      {required String accountBalance,
+      required String title,
+      required double amount,
+      required String category,
+      required String description,
+      required DateTime creationDate,
+      required DateTime updateDate}) {
+    // TODO: implement createIncome
+    throw UnimplementedError();
+  }
 
-    final incomes = querySnapshot.docs
-        .map((doc) => IncomeModel.fromFirestore(doc, null))
-        .toList();
+  @override
+  Future<void> delete(
+      {required String accountBalance,
+      required String currentTitle,
+      required double amount}) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
 
-    return incomes;
+  @override
+  Future<Income> getOne(
+      {required String accountBalance,
+      required String currentTitle,
+      required double amount}) {
+    // TODO: implement getOne
+    throw UnimplementedError();
   }
 }
