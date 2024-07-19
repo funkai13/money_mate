@@ -3,12 +3,12 @@ import 'package:money_mate/feature/Transactions/domain/entity/income.dart';
 
 class IncomeModel extends Income {
   IncomeModel({
-    required super.account,
     required super.amount,
     required super.category,
     required super.description,
-    required super.id,
-    required super.uid,
+    required super.title,
+    required super.updateDate,
+    required super.creationDate,
   });
 
   factory IncomeModel.fromFirestore(
@@ -17,22 +17,24 @@ class IncomeModel extends Income {
   ) {
     final data = snapshot.data();
     return IncomeModel(
-        account: data?['account'],
-        amount: data?['amount'],
-        category: data?['category'],
-        description: data?['description'],
-        id: data?['id'],
-        uid: data?['uid']);
+      amount: data?['amount'],
+      category: data?['category'],
+      description: data?['description'],
+      title: data?['title'],
+      creationDate: (data?['creation_date'] as Timestamp?)!
+          .toDate(), // Convierte Timestamp a DateTime
+      updateDate: (data?['update_date'] as Timestamp?)!.toDate(),
+    );
   }
 
   Map<String, dynamic> toFirestore() {
     return {
-      "account": account,
-      "amount": amount,
-      "category": category,
-      "description": description,
-      "id": id,
-      "uid": uid,
+      'title': title,
+      'update_date': updateDate,
+      'creation_date': creationDate,
+      'amount': amount,
+      'category': category,
+      'description': description,
     };
   }
 }
