@@ -12,7 +12,6 @@ import 'package:money_mate/feature/statistics/presenter/screen/statistics_screen
 import 'package:money_mate/feature/users/presenter/screen/user_profile_register_screen.dart';
 import 'package:money_mate/routes.dart';
 
-import '../../feature/Transactions/presenter/screen/widgets/prueba_income_screen.dart';
 import '../../feature/Transactions/presenter/screen/widgets/select_account.dart';
 import '../../feature/Transactions/presenter/screen/widgets/select_category.dart';
 
@@ -68,10 +67,10 @@ GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
           path: Routes.planning,
           builder: (context, state) => PlanningScreen(),
         ),
-        GoRoute(
-          path: Routes.incomes,
-          builder: (context, state) => const IncomeScreen(),
-        ),
+        // GoRoute(
+        //   path: Routes.incomes,
+        //   builder: (context, state) => const IncomeScreen(),
+        // ),
         GoRoute(
             path: Routes.profileRegister,
             builder: (context, state) => const ProfileRegisterScreen()),
