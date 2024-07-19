@@ -1,18 +1,17 @@
 class Income {
   const Income({
-    required this.uid,
-    required this.id,
-    required this.account,
+    required this.title,
     required this.amount,
     required this.category,
     required this.description,
+    required this.updateDate,
+    required this.creationDate,
     //required this.date,
   });
-  final String? uid;
-  final String? id;
-  final String? account;
-  final int? amount;
-  final String? category;
+  final String title;
+  final double amount;
+  final String category;
   final String? description;
-  //final DateTime? date;
+  final DateTime creationDate;
+  final DateTime? updateDate;
 }
