@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:money_mate/core/provider/navigation_provider.dart';
 import 'package:money_mate/firebase_options.dart';
 
-final getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

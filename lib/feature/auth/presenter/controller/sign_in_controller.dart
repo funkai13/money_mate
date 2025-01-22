@@ -20,7 +20,6 @@ class SignInController extends AutoDisposeAsyncNotifier<SignInStatus> {
     final authRepo = ref.read(signInServiceProvider);
 
     final result = await authRepo.signIn(email: email, password: password);
-    context.go(Routes.home);
     result.fold(
       (value) {
         state = const AsyncData(SignInStatus.success);
